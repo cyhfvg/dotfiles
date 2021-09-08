@@ -1,0 +1,178 @@
+" IdeaVim 's <Alt> is 'a' instead of Vim's 'm'
+" <Shift> is 'S'
+" <Ctrl> is 'C'
+"
+"
+
+" 设置先导键为 空格
+let mapleader = " "
+" 检索时不区分大小写
+set ignorecase
+" 检索时，有大写字母自动区分大小写
+set smartcase
+" 检索时，输入立刻反映
+set incsearch
+" 高度search内容
+set hlsearch
+
+" 顶部，底部留3行
+set scrolloff=5
+
+" 高亮显示对应括号
+set showmatch
+set showmatch matchtime=1
+
+nnoremap <Esc><Esc> :noh<CR><Esc>
+
+" 允许环回移动
+set whichwrap=b,s,h,l,<,>,[,],~
+
+" 设置message表示栏为2行
+set cmdheight=2
+" 设置status行默认显示
+set laststatus=2
+" 设置显示cmd
+set showcmd
+
+" 共用系统剪贴板
+set clipboard+=unnamed
+
+" 使用idea进行行的join，更加智能
+set ideajoin
+
+" Multiple cursors support
+set multiple-cursors
+
+" 快捷键 {{{1
+"
+" 窗口 {{{2
+" Alt+Shift+hjkl
+noremap <a-S-h> <c-w>h
+noremap <a-S-l> <c-w>l
+noremap <a-S-j> <c-w>j
+noremap <a-S-k> <c-w>k
+inoremap <a-S-h> <esc><c-w>h
+inoremap <a-S-l> <esc><c-w>l
+inoremap <a-S-j> <esc><c-w>j
+inoremap <a-S-k> <esc><c-w>k
+" 2}}}
+"
+" tab {{{2
+noremap <leader>1 1gt<cr>
+noremap <leader>2 2gt<cr>
+noremap <leader>3 3gt<cr>
+noremap <leader>4 4gt<cr>
+noremap <leader>5 5gt<cr>
+noremap <leader>6 6gt<cr>
+noremap <leader>7 7gt<cr>
+noremap <leader>8 8gt<cr>
+noremap <leader>9 9gt<cr>
+noremap <leader>0 10gt<cr>
+" 2}}}
+"
+" Ctrl+hjkl 移动光标 {{{2
+noremap <C-h> <left>
+noremap <C-j> <down>
+noremap <C-k> <up>
+noremap <C-l> <right>
+inoremap <C-h> <left>
+inoremap <C-j> <down>
+inoremap <C-k> <up>
+inoremap <C-l> <right>
+" 2}}}
+"
+" cmd {{{2
+cnoremap <c-h> <left>
+cnoremap <c-j> <down>
+cnoremap <c-k> <up>
+cnoremap <c-l> <right>
+cnoremap <c-a> <home>
+cnoremap <c-e> <end>
+cnoremap <c-f> <c-d>
+cnoremap <c-b> <left>
+cnoremap <c-d> <del>
+cnoremap <c-_> <c-k>
+" 2}}}
+"
+" 文本对象相关 {{{2
+" 方法对象
+nnoremap [m :action MethodUp<cr>
+nnoremap ]m :action MethodDown<cr>
+" 2}}}
+"
+" class 相关 {{{2
+" 跳转到定义处 同[gd]
+nmap <leader>gd :action GotoDeclaration<cr>
+" 在{@code interface} 全文件中使用，可显示所有实现类
+nmap <leader>gi :action GotoImplementation<cr>
+" 显示光标所在单位的所有使用位置
+nmap <leader>gu :action FindUsages<cr>
+" 2}}}
+"
+" 搜索相关 {{{2
+" 显示搜索类的搜索框
+nmap <leader>fc :action GotoClass<cr>
+" 显示搜索文件的搜索框
+nmap <leader>ff :action GotoFile<cr>
+" 显示搜索索引的搜索框
+nmap <leader>fs :action GotoSymbol<cr>
+" 显示搜索action的搜索框
+nmap <leader>fa :action GotoAction<cr>
+"2}}}
+"
+" 补全相关 {{{2
+inoremap <C-i> <Esc>:action CodeCompletion<cr>i
+" 2}}}
+"
+" idea窗口相关 {{{2
+" 以popup形式显示当前文件的tags
+nmap <leader>s :action FileStructurePopup<cr>
+" 显示方法结构窗口 [使用Vista的快捷键]
+nmap <leader>t :action ActivateStructureToolWindow<cr>
+nmap <leader>we :action ShowErrorDescription<cr>
+" 以popup形式显示书签列表(有列表)
+nmap <leader>wb :action ShowBookmarks<cr>
+" 显示最近使用的文件 [使用CtrlP的快捷键]
+nmap <leader>wr :action RecentFiles<cr>
+nmap <leader>wR :action RecentChangedFiles<cr>
+nmap <leader>wt :action Vcs.Show.Local.Changes<cr>
+" 2}}}
+"
+" build/run/debug 相关 {{{2
+nmap <leader><leader>c :action CompileDirty<cr>
+nmap <leader><leader>d :action Debug<cr>
+nmap <leader><leader>r :action Run<cr>
+" 以popup形式run搜索框
+nmap <leader><leader>R :action RunAnything<cr>
+" 2}}}
+"
+" fix相关 {{{2
+" Errors
+nmap <leader>ne :action GotoNextError<cr>
+nmap <leader>pe :action GotoPreviousError<cr>
+" 2}}}
+"
+" refactor相关 {{{2
+vmap T :action Refactorings.QuickListPopupAction<cr>
+nmap <leader>rr :action RenameElement<cr>
+" 以popup形式呼唤出generate窗口 {construct,setter and getter, override,
+" toString}
+nmap <leader>rg :action Generate<cr>
+" 优化imports，当有未使用的imports时，会自动删除
+nmap <leader>ri :action OptimizeImports<cr>
+" 2}}}
+"
+" VCS相关 {{{2
+nmap <leader>vc :action Vcs.Show.Local.Changes<cr>
+nmap <leader>vp :action Vcs.QuickListPopupAction<cr>
+nmap <leader>va :action Annotate<cr>
+nmap <leader>vl :action Vcs.Show.Log<cr>
+nmap <leader>vd :action Compare.LastVersion<cr>
+" 2}}}
+"
+" 外部工具相关 {{{2
+nmap <leader>v :action Tool_External Tools_gvim<cr>
+" 2}}}
+"
+" 1}}}
+
