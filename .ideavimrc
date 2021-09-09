@@ -121,45 +121,102 @@ nmap <leader>fa :action GotoAction<cr>
 "2}}}
 "
 " 补全相关 {{{2
+" 显示补全列表
 inoremap <C-i> <Esc>:action CodeCompletion<cr>i
+" 从类名列表中补全
+inoremap <C-x><C-c> <Esc>:action ClassNameCompletion<cr>i
 " 2}}}
 "
 " idea窗口相关 {{{2
-" 以popup形式显示当前文件的tags
-nmap <leader>s :action FileStructurePopup<cr>
 " 显示方法结构窗口 [使用Vista的快捷键]
 nmap <leader>t :action ActivateStructureToolWindow<cr>
 nmap <leader>we :action ShowErrorDescription<cr>
-" 以popup形式显示书签列表(有列表)
-nmap <leader>wb :action ShowBookmarks<cr>
 " 显示最近使用的文件 [使用CtrlP的快捷键]
 nmap <leader>wr :action RecentFiles<cr>
-nmap <leader>wR :action RecentChangedFiles<cr>
-nmap <leader>wt :action Vcs.Show.Local.Changes<cr>
+" 最近更改的文件列表
+nmap <leader>wc :action RecentChangedFiles<cr>
+nmap <leader>wvc :action Vcs.Show.Local.Changes<cr>
+" 收藏窗口
+nmap <leader>wf :action ActivateFavoritesToolWindow<cr>
+" debug窗口
+nmap <leader>wd :action ActivateDebugToolWindow<cr>
+" 显示搜索结果窗口
+nmap <leader>wF :action ActivateFindToolWindow<cr>
+" project 窗口
+nmap <leader>wp :action ActivateProjectToolWindow<cr>
+" Todo 窗口
+nmap <leader>wt :action ActivateTODOToolWindow<cr>
+" 2}}}
+"
+" 添加列表相关 {{{2
+" 添加所有打开的文件至收藏夹
+nmap <leader>aF :action AddAllToFavorites<cr>
+" 添加至收藏夹
+nmap <leader>af :action AddToFavorites<cr>
+
+" 2}}}
+"
+" format 相关 {{{2
+" 自动调整所选位置的缩进
+nmap <leader>Fi :action AutoIndentLines<cr>
+" 2}}}
+"
+" popup相关 {{{2
+" 以popup形式显示书签操作菜单
+nmap <leader>pb :action Bookmarks<cr>
+" 以popup形式显示run搜索框
+nmap <leader>pR :action RunAnything<cr>
+" 以popup形式呼唤出generate窗口 {construct,setter and getter, override, toString}
+nmap <leader>pg :action Generate<cr>
+" 以popup形式显示当前文件的tags
+nmap <leader>ps :action FileStructurePopup<cr>
+" 以popup形式显示书签列表(有列表)
+nmap <leader>pB :action ShowBookmarks<cr>
+" 以popup形式上下文菜单
+nmap <leader>ph :action CallHierarchyPopupMenu<cr>
+" 选择指定配置 run
+nmap <leader>pr :action ChooseRunConfiguration<cr>
+" 以popup形式显示code相关菜单
+nmap <leader>pc :action CodeMenu<cr>
+" 以popup形式显示commander菜单
+nmap <leader>pC :action CommanderPopupMenu<cr>
+" 2}}}
+"
+" Console 相关 {{{2
+" 清空Console
+nmap <leader>cc :action ConsoleView.ClearAll<cr>
+" 2}}}
+"
+" diff 相关 {{{2
+" 与本地最后一个版本比较
+nmap <leader>dl :action Compare.LastVersion<cr>
+" 选定一个文件与当前文件进行diff
+nmap <leader>df :action CompareTwoFiles<cr>
 " 2}}}
 "
 " build/run/debug 相关 {{{2
 nmap <leader><leader>c :action CompileDirty<cr>
 nmap <leader><leader>d :action Debug<cr>
 nmap <leader><leader>r :action Run<cr>
-" 以popup形式run搜索框
-nmap <leader><leader>R :action RunAnything<cr>
 " 2}}}
 "
 " fix相关 {{{2
 " Errors
 nmap <leader>ne :action GotoNextError<cr>
 nmap <leader>pe :action GotoPreviousError<cr>
+" 显示所有处理方式
+nnoremap <leader>xa :action ShowIntentionActions<cr>
+inoremap <leader>xa :action ShowIntentionActions<cr>
 " 2}}}
 "
 " refactor相关 {{{2
 vmap T :action Refactorings.QuickListPopupAction<cr>
-nmap <leader>rr :action RenameElement<cr>
-" 以popup形式呼唤出generate窗口 {construct,setter and getter, override,
-" toString}
-nmap <leader>rg :action Generate<cr>
+nmap <leader>rn :action RenameElement<cr>
 " 优化imports，当有未使用的imports时，会自动删除
 nmap <leader>ri :action OptimizeImports<cr>
+" 重构光标下函数的参数
+nmap <leader>rp :action ChangeSignature<cr>
+"""""""""""""""""""""""""""""" 重构光标所在参数的类型 ChangeTypeSignature
 " 2}}}
 "
 " VCS相关 {{{2
