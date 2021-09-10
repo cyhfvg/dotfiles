@@ -105,8 +105,7 @@ nnoremap ]m :action MethodDown<cr>
 nmap <leader>gd :action GotoDeclaration<cr>
 " 在{@code interface} 全文件中使用，可显示所有实现类
 nmap <leader>gi :action GotoImplementation<cr>
-" 显示光标所在单位的所有使用位置
-nmap <leader>gu :action FindUsages<cr>
+nmap <leader>gu :action <cr>
 " 2}}}
 "
 " 搜索相关 {{{2
@@ -122,14 +121,17 @@ nmap <leader>fa :action GotoAction<cr>
 "
 " 补全相关 {{{2
 " 显示补全列表
-inoremap <C-i> <Esc>:action CodeCompletion<cr>i
+inoremap <C-i> <Esc>:action CodeCompletion<cr>a
+" 智能补全
+"nnoremap <C-i> <Esc>:action SmartTypeCompletion<cr>a
 " 从类名列表中补全
-inoremap <C-x><C-c> <Esc>:action ClassNameCompletion<cr>i
+inoremap <C-x><C-c> <Esc>:action ClassNameCompletion<cr>a
 " 2}}}
 "
 " idea窗口相关 {{{2
 " 显示方法结构窗口 [使用Vista的快捷键]
-nmap <leader>t :action ActivateStructureToolWindow<cr>
+nmap <leader>ws :action ActivateStructureToolWindow<cr>
+" 显示错误提示
 nmap <leader>we :action ShowErrorDescription<cr>
 " 显示最近使用的文件 [使用CtrlP的快捷键]
 nmap <leader>wr :action RecentFiles<cr>
@@ -146,6 +148,12 @@ nmap <leader>wF :action ActivateFindToolWindow<cr>
 nmap <leader>wp :action ActivateProjectToolWindow<cr>
 " Todo 窗口
 nmap <leader>wt :action ActivateTODOToolWindow<cr>
+" 隐藏所有窗口
+nmap <leader>wh :action HideAllWindows<cr>
+" 显示所有断点窗口
+nmap <leader>wb :action ViewBreakpoints<cr>
+" 显示光标所在单位的所有使用位置
+nmap <leader>wu :action FindUsages<cr>
 " 2}}}
 "
 " 添加列表相关 {{{2
@@ -180,6 +188,10 @@ nmap <leader>pr :action ChooseRunConfiguration<cr>
 nmap <leader>pc :action CodeMenu<cr>
 " 以popup形式显示commander菜单
 nmap <leader>pC :action CommanderPopupMenu<cr>
+" 以popup形式使用处
+nmap <leader>pu :action ShowUsages<cr>
+" 以popup形式显示最近搜索过的使用处
+nmap <leader>pru :action ShowRecentFindUsagesGroup<cr>
 " 2}}}
 "
 " Console 相关 {{{2
@@ -189,24 +201,30 @@ nmap <leader>cc :action ConsoleView.ClearAll<cr>
 "
 " diff 相关 {{{2
 " 与本地最后一个版本比较
-nmap <leader>dl :action Compare.LastVersion<cr>
+nmap <leader>Dl :action Compare.LastVersion<cr>
 " 选定一个文件与当前文件进行diff
-nmap <leader>df :action CompareTwoFiles<cr>
+nmap <leader>Df :action CompareTwoFiles<cr>
 " 2}}}
 "
 " build/run/debug 相关 {{{2
 nmap <leader><leader>c :action CompileDirty<cr>
 nmap <leader><leader>d :action Debug<cr>
 nmap <leader><leader>r :action Run<cr>
+" toogle方法级断点
+nmap <leader>dmb :action ToggleMethodBreakpoint<cr>
+" toogle行级断点
+nmap <leader>dlb :action ToggleLineBreakpoint<cr>
+" 运行到光标
+nmap <leader>drl :action RunToCursor<cr>
 " 2}}}
 "
 " fix相关 {{{2
 " Errors
-nmap <leader>ne :action GotoNextError<cr>
-nmap <leader>pe :action GotoPreviousError<cr>
+nmap [e :action GotoPreviousError<cr>
+nmap ]e :action GotoNextError<cr>
 " 显示所有处理方式
 nnoremap <leader>xa :action ShowIntentionActions<cr>
-inoremap <leader>xa :action ShowIntentionActions<cr>
+inoremap <leader>xa <Esc>:action ShowIntentionActions<cr>a
 " 2}}}
 "
 " refactor相关 {{{2
@@ -231,5 +249,114 @@ nmap <leader>vd :action Compare.LastVersion<cr>
 nmap <leader>v :action Tool_External Tools_gvim<cr>
 " 2}}}
 "
+" 其它 {{{2
+" 文档format
+nmap <leader><leader>p :action ReformatCode<cr>
+" 2}}}
+"
+"
 " 1}}}
 
+"
+"Debugger.AddToWatch
+"Debugger.FocusOnBreakpoint
+"Debugger.MarkObject
+"Debugger.Tree.AddToWatches
+"Debugger.WatchesPanelPopup
+"DebuggerActions
+"DebugMainMenu
+"EditBreakpoint
+"
+"Diff.EditorPopupMenu
+"Diff.HighlightMode
+"Diff.NextChange
+"Diff.PrevChange
+"Diff.ShowDiff
+"DiffPanel.Toolbar
+"
+"DSM.Popup
+"DSM.OpenDependencies
+"DSM.Toolbar
+"
+"DuplicatesForm.SendToLeft
+"DuplicatesForm.SendToRight
+"DupLocate
+"
+"EditorContextBarMenu
+"EditorIncreaseFontSize
+"EditorDecreaseFontSize
+"EditorToggleColumnMode
+"EditorToggleUseSoftWraps
+"
+"ExternalSystemView.ActionsToolbar
+"ExternalSystemView.BaseProjectMenu
+"ExternalSystemView.ProjectMenu
+"
+"ExtractClass
+"ExtractInterface
+"ExtractMethod
+"ExtractSuperclass
+"
+"Faces.MainGraphPopup
+"Faces.Navigation.Graph.PageTree.GotoDeclarationAction
+"Faces.Navigation.Graph.PageTree.GotoDeclarationAction
+"
+"FindUsagesInFile
+"
+"FixDocComment
+"
+"ForceRunToCursor
+"ForceStepInto
+"ForceStepOver
+"StepInto
+"StepOut
+"StepOver
+"Stop
+"
+"
+"
+"UsageView.Popup
+"UsageView.ShowRecentFindUsages
+"
+"
+"
+"
+"GotoAction
+"GotoChangedFile
+"GoToClass
+"GotoDeclaration
+"GotoFile
+"GotoImplementation
+"GoToLinkTarget
+"GoToMenu
+"GoToMenuEx
+"GotoSuperMethod
+"GotoSymbol
+"GotoTypeDeclaration
+"
+"HideActiveWindow
+"HideAllWindows
+"HideSideWindows
+"
+"HighlightUsagesInFile
+"
+"HippieCompletion
+"
+"
+"ImplementMethods
+"
+"
+"
+"
+"
+"IncrementWindowHeight                              <M-S-Down>
+"IncrementWindowWidth                               <M-S-Right>
+"DecrementWindowHeight                              <M-S-Up>
+"DecrementWindowWidth                               <M-S-Left>
+"
+"
+"
+"
+"ToggleBookmark
+"
+"
