@@ -234,8 +234,6 @@ vnoremap <leader>daw :action Debugger.AddToWatch<cr>
 " Errors
 nnoremap [e :action GotoPreviousError<cr>
 nnoremap ]e :action GotoNextError<cr>
-" Doc 相关
-nnoremap ]i :action GotoNextError<cr>
 " 显示所有处理方式
 nnoremap <leader>xa :action ShowIntentionActions<cr>
 " 2}}}
