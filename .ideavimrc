@@ -35,7 +35,7 @@ set laststatus=2
 set showcmd
 
 " 共用系统剪贴板
-set clipboard+=unnamed
+"set clipboard+=unnamed
 
 " 使用idea进行行的join，更加智能
 set ideajoin
@@ -102,21 +102,24 @@ nnoremap ]m :action MethodDown<cr>
 "
 " class 相关 {{{2
 " 跳转到定义处 同[gd]
-nmap <leader>gd :action GotoDeclaration<cr>
+nnoremap <leader>gd :action GotoDeclaration<cr>
+" 在变量上使用，可直接跳转至变量类
+nnoremap <leader>gD :action GotoTypeDeclaration<cr>
 " 在{@code interface} 全文件中使用，可显示所有实现类
-nmap <leader>gi :action GotoImplementation<cr>
-nmap <leader>gu :action <cr>
+nnoremap <leader>gi :action GotoImplementation<cr>
+" 在实现方法内使用，跳转至抽象方法
+nnoremap <leader>gs :action GotoSuperMethod<cr>
 " 2}}}
 "
 " 搜索相关 {{{2
 " 显示搜索类的搜索框
-nmap <leader>fc :action GotoClass<cr>
+nnoremap <leader>fc :action GotoClass<cr>
 " 显示搜索文件的搜索框
-nmap <leader>ff :action GotoFile<cr>
+nnoremap <leader>ff :action GotoFile<cr>
 " 显示搜索索引的搜索框
-nmap <leader>fs :action GotoSymbol<cr>
+nnoremap <leader>fs :action GotoSymbol<cr>
 " 显示搜索action的搜索框
-nmap <leader>fa :action GotoAction<cr>
+nnoremap <leader>fa :action GotoAction<cr>
 "2}}}
 "
 " 补全相关 {{{2
@@ -130,233 +133,169 @@ inoremap <C-x><C-c> <Esc>:action ClassNameCompletion<cr>a
 "
 " idea窗口相关 {{{2
 " 显示方法结构窗口 [使用Vista的快捷键]
-nmap <leader>ws :action ActivateStructureToolWindow<cr>
+nnoremap <leader>ws :action ActivateStructureToolWindow<cr>
 " 显示错误提示
-nmap <leader>we :action ShowErrorDescription<cr>
+nnoremap <leader>we :action ShowErrorDescription<cr>
 " 显示最近使用的文件 [使用CtrlP的快捷键]
-nmap <leader>wr :action RecentFiles<cr>
+nnoremap <leader>wr :action RecentFiles<cr>
 " 最近更改的文件列表
-nmap <leader>wc :action RecentChangedFiles<cr>
-nmap <leader>wvc :action Vcs.Show.Local.Changes<cr>
+nnoremap <leader>wc :action RecentChangedFiles<cr>
+nnoremap <leader>wvc :action Vcs.Show.Local.Changes<cr>
 " 收藏窗口
-nmap <leader>wf :action ActivateFavoritesToolWindow<cr>
+nnoremap <leader>wf :action ActivateFavoritesToolWindow<cr>
 " debug窗口
-nmap <leader>wd :action ActivateDebugToolWindow<cr>
+nnoremap <leader>wd :action ActivateDebugToolWindow<cr>
 " 显示搜索结果窗口
-nmap <leader>wF :action ActivateFindToolWindow<cr>
+nnoremap <leader>wF :action ActivateFindToolWindow<cr>
 " project 窗口
-nmap <leader>wp :action ActivateProjectToolWindow<cr>
+nnoremap <leader>wp :action ActivateProjectToolWindow<cr>
 " Todo 窗口
-nmap <leader>wt :action ActivateTODOToolWindow<cr>
+nnoremap <leader>wt :action ActivateTODOToolWindow<cr>
+" 隐藏激活的窗口
+nnoremap <leader>wh :action HideActiveWindow<cr>
 " 隐藏所有窗口
-nmap <leader>wh :action HideAllWindows<cr>
+nnoremap <leader>wH :action HideAllWindows<cr>
 " 显示所有断点窗口
-nmap <leader>wb :action ViewBreakpoints<cr>
+nnoremap <leader>wb :action ViewBreakpoints<cr>
 " 显示光标所在单位的所有使用位置
-nmap <leader>wu :action FindUsages<cr>
+nnoremap <leader>wu :action FindUsages<cr>
+""""""""""""""""""""""""""""""""""""""FindUsagesInFile
 " 2}}}
 "
 " 添加列表相关 {{{2
 " 添加所有打开的文件至收藏夹
-nmap <leader>aF :action AddAllToFavorites<cr>
+nnoremap <leader>aF :action AddAllToFavorites<cr>
 " 添加至收藏夹
-nmap <leader>af :action AddToFavorites<cr>
+nnoremap <leader>af :action AddToFavorites<cr>
 
 " 2}}}
 "
 " format 相关 {{{2
 " 自动调整所选位置的缩进
-nmap <leader>Fi :action AutoIndentLines<cr>
+nnoremap <leader>Fi :action AutoIndentLines<cr>
+" 文档format
+nnoremap <leader><leader>p :action ReformatCode<cr>
 " 2}}}
 "
 " popup相关 {{{2
 " 以popup形式显示书签操作菜单
-nmap <leader>pb :action Bookmarks<cr>
+nnoremap <leader>pB :action Bookmarks<cr>
 " 以popup形式显示run搜索框
-nmap <leader>pR :action RunAnything<cr>
+nnoremap <leader>pR :action RunAnything<cr>
 " 以popup形式呼唤出generate窗口 {construct,setter and getter, override, toString}
-nmap <leader>pg :action Generate<cr>
+nnoremap <leader>pg :action Generate<cr>
 " 以popup形式显示当前文件的tags
-nmap <leader>ps :action FileStructurePopup<cr>
+nnoremap <leader>ps :action FileStructurePopup<cr>
 " 以popup形式显示书签列表(有列表)
-nmap <leader>pB :action ShowBookmarks<cr>
+nnoremap <leader>pb :action ShowBookmarks<cr>
 " 以popup形式上下文菜单
-nmap <leader>ph :action CallHierarchyPopupMenu<cr>
-" 选择指定配置 run
-nmap <leader>pr :action ChooseRunConfiguration<cr>
+nnoremap <leader>ph :action CallHierarchyPopupMenu<cr>
+" 选择指定配置 run ------ TODO: <leader>pr
+nnoremap <leader>pz :action ChooseRunConfiguration<cr>
 " 以popup形式显示code相关菜单
-nmap <leader>pc :action CodeMenu<cr>
+nnoremap <leader>pc :action CodeMenu<cr>
 " 以popup形式显示commander菜单
-nmap <leader>pC :action CommanderPopupMenu<cr>
+nnoremap <leader>pC :action CommanderPopupMenu<cr>
 " 以popup形式使用处
-nmap <leader>pu :action ShowUsages<cr>
+nnoremap <leader>pu :action ShowUsages<cr>
 " 以popup形式显示最近搜索过的使用处
-nmap <leader>pru :action ShowRecentFindUsagesGroup<cr>
+nnoremap <leader>pU :action ShowRecentFindUsagesGroup<cr>
+" 以popup形式显示goto菜单
+nnoremap <leader>pG :action GoToMenu<cr>
 " 2}}}
 "
 " Console 相关 {{{2
 " 清空Console
-nmap <leader>cc :action ConsoleView.ClearAll<cr>
+nnoremap <leader>cc :action ConsoleView.ClearAll<cr>
 " 2}}}
 "
 " diff 相关 {{{2
 " 与本地最后一个版本比较
-nmap <leader>Dl :action Compare.LastVersion<cr>
+nnoremap <leader>Dl :action Compare.LastVersion<cr>
 " 选定一个文件与当前文件进行diff
-nmap <leader>Df :action CompareTwoFiles<cr>
+nnoremap <leader>Df :action CompareTwoFiles<cr>
 " 2}}}
 "
 " build/run/debug 相关 {{{2
-nmap <leader><leader>c :action CompileDirty<cr>
-nmap <leader><leader>d :action Debug<cr>
-nmap <leader><leader>r :action Run<cr>
-" toogle方法级断点
-nmap <leader>dmb :action ToggleMethodBreakpoint<cr>
-" toogle行级断点
-nmap <leader>dlb :action ToggleLineBreakpoint<cr>
+nnoremap <leader><leader>c :action CompileDirty<cr>
+nnoremap <leader><leader>d :action Debug<cr>
+nnoremap <leader><leader>r :action Run<cr>
 " 运行到光标
-nmap <leader>drl :action RunToCursor<cr>
+nnoremap <leader>drl :action RunToCursor<cr>
+" 编辑断点属性
+nnoremap <leader>dep :action EditBreakpoint<cr>
+" 添加watch
+nnoremap <leader>daw :action Debugger.AddToWatch<cr>
+" 添加选中表达式到watch
+vnoremap <leader>daw :action Debugger.AddToWatch<cr>
 " 2}}}
 "
 " fix相关 {{{2
 " Errors
-nmap [e :action GotoPreviousError<cr>
-nmap ]e :action GotoNextError<cr>
+nnoremap [e :action GotoPreviousError<cr>
+nnoremap ]e :action GotoNextError<cr>
+" Doc 相关
+nnoremap ]i :action GotoNextError<cr>
 " 显示所有处理方式
 nnoremap <leader>xa :action ShowIntentionActions<cr>
-inoremap <leader>xa <Esc>:action ShowIntentionActions<cr>a
 " 2}}}
 "
 " refactor相关 {{{2
-vmap T :action Refactorings.QuickListPopupAction<cr>
-nmap <leader>rn :action RenameElement<cr>
+vnoremap T :action Refactorings.QuickListPopupAction<cr>
+nnoremap <leader>rn :action RenameElement<cr>
 " 优化imports，当有未使用的imports时，会自动删除
-nmap <leader>ri :action OptimizeImports<cr>
+nnoremap <leader>ri :action OptimizeImports<cr>
 " 重构光标下函数的参数
-nmap <leader>rp :action ChangeSignature<cr>
+nnoremap <leader>rp :action ChangeSignature<cr>
 """""""""""""""""""""""""""""" 重构光标所在参数的类型 ChangeTypeSignature
 " 2}}}
 "
 " VCS相关 {{{2
-nmap <leader>vc :action Vcs.Show.Local.Changes<cr>
-nmap <leader>vp :action Vcs.QuickListPopupAction<cr>
-nmap <leader>va :action Annotate<cr>
-nmap <leader>vl :action Vcs.Show.Log<cr>
-nmap <leader>vd :action Compare.LastVersion<cr>
+nnoremap <leader>vc :action Vcs.Show.Local.Changes<cr>
+nnoremap <leader>vp :action Vcs.QuickListPopupAction<cr>
+nnoremap <leader>va :action Annotate<cr>
+nnoremap <leader>vl :action Vcs.Show.Log<cr>
+nnoremap <leader>vd :action Compare.LastVersion<cr>
 " 2}}}
 "
 " 外部工具相关 {{{2
-nmap <leader>v :action Tool_External Tools_gvim<cr>
+nnoremap <leader>v :action Tool_External Tools_gvim<cr>
+" 2}}}
+"
+" Toggle 相关 {{{2
+" toggle方法级断点
+nnoremap <leader>tmp :action ToggleMethodBreakpoint<cr>
+" toggle行级断点
+nnoremap <leader>tlp :action ToggleLineBreakpoint<cr>
+" toggle行级一次性断点
+nnoremap <leader>ttp :action ToggleTemporaryLineBreakpoint<cr>
+" toggle变量断点
+nnoremap <leader>tfp :action ToggleFieldBreakpoint<cr>
+" toggle断点有效
+nnoremap <leader>tpe :action ToggleBreakpointEnabled<cr>
+" toogle书签
+nnoremap <leader>tb :action ToggleBookmark<cr>
 " 2}}}
 "
 " 其它 {{{2
-" 文档format
-nmap <leader><leader>p :action ReformatCode<cr>
+" 高亮文件内 选定内容的所有使用处
+nnoremap <leader><leader>h :action HighlightUsagesInFile<cr>
+" 设置字体变大
+nnoremap <leader><leader>fu :action EditorIncreaseFontSize<cr>
+" 设置字体变小
+nnoremap <leader><leader>fd :action EditorDecreaseFontSize<cr>
 " 2}}}
-"
 "
 " 1}}}
 
 "
-"Debugger.AddToWatch
-"Debugger.FocusOnBreakpoint
-"Debugger.MarkObject
-"Debugger.Tree.AddToWatches
-"Debugger.WatchesPanelPopup
-"DebuggerActions
 "DebugMainMenu
-"EditBreakpoint
 "
-"Diff.EditorPopupMenu
-"Diff.HighlightMode
-"Diff.NextChange
-"Diff.PrevChange
-"Diff.ShowDiff
-"DiffPanel.Toolbar
-"
-"DSM.Popup
-"DSM.OpenDependencies
-"DSM.Toolbar
-"
-"DuplicatesForm.SendToLeft
-"DuplicatesForm.SendToRight
-"DupLocate
-"
-"EditorContextBarMenu
-"EditorIncreaseFontSize
-"EditorDecreaseFontSize
-"EditorToggleColumnMode
 "EditorToggleUseSoftWraps
 "
-"ExternalSystemView.ActionsToolbar
-"ExternalSystemView.BaseProjectMenu
-"ExternalSystemView.ProjectMenu
-"
+" ? 提炼
 "ExtractClass
 "ExtractInterface
 "ExtractMethod
 "ExtractSuperclass
-"
-"Faces.MainGraphPopup
-"Faces.Navigation.Graph.PageTree.GotoDeclarationAction
-"Faces.Navigation.Graph.PageTree.GotoDeclarationAction
-"
-"FindUsagesInFile
-"
-"FixDocComment
-"
-"ForceRunToCursor
-"ForceStepInto
-"ForceStepOver
-"StepInto
-"StepOut
-"StepOver
-"Stop
-"
-"
-"
-"UsageView.Popup
-"UsageView.ShowRecentFindUsages
-"
-"
-"
-"
-"GotoAction
-"GotoChangedFile
-"GoToClass
-"GotoDeclaration
-"GotoFile
-"GotoImplementation
-"GoToLinkTarget
-"GoToMenu
-"GoToMenuEx
-"GotoSuperMethod
-"GotoSymbol
-"GotoTypeDeclaration
-"
-"HideActiveWindow
-"HideAllWindows
-"HideSideWindows
-"
-"HighlightUsagesInFile
-"
-"HippieCompletion
-"
-"
-"ImplementMethods
-"
-"
-"
-"
-"
-"IncrementWindowHeight                              <M-S-Down>
-"IncrementWindowWidth                               <M-S-Right>
-"DecrementWindowHeight                              <M-S-Up>
-"DecrementWindowWidth                               <M-S-Left>
-"
-"
-"
-"
-"ToggleBookmark
-"
 "
