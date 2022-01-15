@@ -3,6 +3,9 @@
 " <Ctrl> is 'C'
 "
 "
+"set idearefactormode=keep
+"
+set NERDTree
 
 " 设置先导键为 空格
 let mapleader = " "
