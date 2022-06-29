@@ -8,8 +8,10 @@ setopt promptsubst         # enable command substitution in prompt
 setopt interactivecomments # allow comments in interactive mode
 setopt nonomatch           # hide error message if there is no match for the pattern
 setopt notify              # report the status of background jobs immediately
+setopt no_beep
 #setopt numericglobsort     # sort filenames numerically when it makes sense
-#setopt correct            # auto correct mistakes
+unsetopt correct            # (don't do) auto correct mistakes
+unsetopt correctall         # (don't do) auto correct mistakes for arguments
 #setopt magicequalsubst     # enable filename expansion for arguments of the form ‘anything=expression’
 #}}}
 
@@ -101,7 +103,7 @@ configure_prompt() {
             PROMPT=$'%F{%(#.blue.green)}${debian_chroot:+($debian_chroot)─}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))─}(%B%F{%(#.red.blue)}%n'$prompt_symbol$'%m%b%F{%(#.blue.green)})-[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{%(#.blue.green)}]\n%B%(#.%F{red}$.%F{blue}$)%b%F{reset} '
             ;;
         oneline)
-            PROMPT=$'${debian_chroot:+($debian_chroot)}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))}%B%F{%(#.red.blue)}%n@%m%b%F{reset}:%B%F{%(#.blue.green)}%~%b%F{reset} %F{red}$ '
+            PROMPT=$'${debian_chroot:+($debian_chroot)}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))}%B%F{%(#.red.blue)}%n@%m%b%F{reset}:%B%F{%(#.blue.green)}%~%b%F{reset} %F{red}$%F{reset} '
             RPROMPT=
             ;;
         backtrack)
@@ -114,7 +116,7 @@ configure_prompt() {
 
 # prompt select {{{1
 PROMPT_ALTERNATIVE=twoline
-NEWLINE_BEFORE_PROMPT=yes
+NEWLINE_BEFORE_PROMPT=no
 #}}}
 
 if [ "$color_prompt" = yes ]; then
@@ -215,7 +217,7 @@ if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     export LS_COLORS="$LS_COLORS:ow=30;44:" # fix ls color for folders with 777 permissions
 
-    alias ls='ls --color=auto'
+    alias ls='ls --color=auto --group-directories-first'
     alias dir='dir --color=auto'
     alias vdir='vdir --color=auto'
 
@@ -239,9 +241,9 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some more ls aliases
-alias ll='ls -l'
-alias la='ls -A'
-alias l='ls -CF'
+alias ll='ls -l --color --group-directories-first'
+alias la='ls -A --color --group-directories-first'
+alias l='ls -CF --color --group-directories-first'
 
 # enable auto-suggestions based on the history
 if [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
@@ -319,6 +321,12 @@ if [ -n "$(which fzf)" ]; then
     }
 fi
 #}}}
+
+# alias {{{1
+alias ..='cd ../'
+alias ...='cd ../../'
+alias ....='cd ../../../'
+# }}}
 
 # quick cmd {{{1
 alias nc='ncat'
