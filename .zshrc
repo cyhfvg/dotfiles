@@ -23,13 +23,13 @@ PROMPT_EOL_MARK=""
 # keybindings {{{1
 #bindkey -e                                        # emacs key bindings
 bindkey -v                                        # vi key bindings
-bindkey ' ' magic-space                           # do history expansion on space
 bindkey '^[[3~' delete-char                       # delete
 bindkey "^A"   beginning-of-line                    # ctrl-a
 bindkey "^E"   end-of-line                          # ctrl-e
 bindkey "^U"   backward-kill-line                   # ctrl-u
 bindkey "^K"   kill-line                            # ctrl-k
 bindkey "^R"   history-incremental-search-backward  # ctrl-r
+#bindkey ' ' magic-space                           # do history expansion on space
 #}}}
 
 # enable completion features
