@@ -1,3 +1,9 @@
+# copy from kalilinux 's .zshrc
+#
+# Adjusted the configuration by @cyhfvg
+#
+#
+
 # ~/.zshrc file for zsh interactive shells.
 # see /usr/share/doc/zsh/examples/zshrc for examples
 
@@ -94,6 +100,11 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+# prompt
+#
+# %~    current_dir
+# %m    host_name
+# %n    user
 configure_prompt() {
     prompt_symbol=㉿
     # Skull emoji for root terminal
@@ -103,7 +114,7 @@ configure_prompt() {
             PROMPT=$'%F{%(#.blue.green)}${debian_chroot:+($debian_chroot)─}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))─}(%B%F{%(#.red.blue)}%n'$prompt_symbol$'%m%b%F{%(#.blue.green)})-[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{%(#.blue.green)}]\n%B%(#.%F{red}$.%F{blue}$)%b%F{reset} '
             ;;
         oneline)
-            PROMPT=$'${debian_chroot:+($debian_chroot)}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))}%B%F{%(#.red.blue)}%n@%m%b%F{reset}:%B%F{%(#.blue.green)}%~%b%F{reset} %F{red}$%F{reset} '
+            PROMPT=$'${debian_chroot:+($debian_chroot)}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))}%B%F{%(#.red.blue)}%n@%m%b%F{reset}%F{blue} $ %F{reset}'
             RPROMPT=
             ;;
         backtrack)
