@@ -341,8 +341,10 @@ alias ....='cd ../../../'
 
 # quick cmd {{{1
 alias nc='ncat'
-alias bat='batcat'
-alias vi='vim'
-alias gobuster-dir='gobuster dir -w /usr/share/seclists/Discovery/Web-Content/common.txt'
-alias fvim='vim $(fzf)'
+alias fvim='nvim $(fzf)'
+alias john-Rockyou='john --wordlist=/usr/share/seclists/Passwords/Leaked-Databases/rockyou.txt'
+alias jar='java -jar'
+alias rnc='rlwrap -cAr nc -lvnp'
+alias lnc='nc -lvnp'
+alias stealth_ssh='ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no"'
 #}}}
