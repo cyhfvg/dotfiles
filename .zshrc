@@ -79,8 +79,11 @@ setopt hist_ignore_dups       # ignore duplicated commands history list
 setopt hist_ignore_space      # ignore commands that start with space
 setopt hist_verify            # show command with history expansion to user before running it
 
+export HISTIGNORE="&:ls:[bf]g:exit:history"
+
 # force zsh to show the complete history
 alias history="history 0"
+
 
 # configure `time` format
 TIMEFMT=$'\nreal\t%E\nuser\t%U\nsys\t%S\ncpu\t%P'
