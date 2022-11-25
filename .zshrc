@@ -331,18 +331,19 @@ fi
 #}}}
 
 # add alias for dependence binaries {{{1
-which batcat        &>/dev/null && alias bat='batcat'
-which crackmapexec  &>/dev/null && alias cme='crackmapexec'
-which fzf           &>/dev/null && alias fcd='p="$(ls -d */ | fzf --exit-0)";[ -n "${p}" ] && cd "${p}"'
-which fzf           &>/dev/null && alias fcp='function bb82ce0d(){ [ $# -lt 1 ] && return || ([ -z "$1" ] && exit 1); p=$(find "$1" 2>/dev/null | fzf --exit-0);[ -n "${p}" ] && ([ -d "${p}" ] && cp -r "${p}" . || cp "${p}" . );}; bb82ce0d'
-which fzf           &>/dev/null && alias fvi='f="$(find . -type f 2>/dev/null | fzf --exit-0)";[ -n "${f}" ] && vi "${f}"'
-which gobuster      &>/dev/null && alias gobuster-dir-param='gobuster dir --no-error -a "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101 Firefox/102.0" -e -r'
-which john          &>/dev/null && alias john-Rockyou='john --wordlist=/usr/share/seclists/Passwords/Leaked-Databases/rockyou.txt'
-which ncat          &>/dev/null && alias nc='ncat'
-which nvim          &>/dev/null && alias vi='nvim' || (which vim &>/dev/null && alias vi='vim')
-which python3       &>/dev/null && alias pyHttpServer='python3 -m http.server' || (which python2 &>/dev/null && alias pyHttpServer='python2 -m SimpleHTTPServer')
-which searchsploit  &>/dev/null && alias search='searchsploit'
-which tldr          &>/dev/null && alias tldr='tldr -t base16 --linux'
+which batcat             &>/dev/null && alias bat='batcat'
+which crackmapexec       &>/dev/null && alias cme='crackmapexec'
+which fzf                &>/dev/null && alias fcd='p="$(ls -d */ | fzf --exit-0)";[ -n "${p}" ] && cd "${p}"'
+which fzf                &>/dev/null && alias fcp='function bb82ce0d(){ [ $# -lt 1 ] && return || ([ -z "$1" ] && exit 1); p=$(find "$1" 2>/dev/null | fzf --exit-0);[ -n "${p}" ] && ([ -d "${p}" ] && cp -r "${p}" . || cp "${p}" . );}; bb82ce0d'
+which fzf                &>/dev/null && alias fvi='f="$(find . -type f 2>/dev/null | fzf --exit-0)";[ -n "${f}" ] && vi "${f}"'
+which gobuster           &>/dev/null && alias gobuster-dir-param='gobuster dir --no-error -a "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101 Firefox/102.0" -e -r'
+which john               &>/dev/null && alias john-Rockyou='john --wordlist=/usr/share/seclists/Passwords/Leaked-Databases/rockyou.txt'
+which ncat               &>/dev/null && alias nc='ncat'
+which nvim               &>/dev/null && alias vi='nvim' || (which vim &>/dev/null && alias vi='vim')
+which python3            &>/dev/null && alias pyHttpServer='python3 -m http.server' || (which python2 &>/dev/null && alias pyHttpServer='python2 -m SimpleHTTPServer')
+which searchsploit       &>/dev/null && alias search='searchsploit'
+which tldr               &>/dev/null && alias tldr='tldr -t base16 --linux'
+which impacket-smbserver &>/dev/null alias smbShareHere='impacket-smbserver -smb2support -username share -password sharepassword share $(pwd)'
 #}}}
 
 # quick command alias {{{
