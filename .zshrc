@@ -14,24 +14,24 @@ function zvm_config() {
     ZVM_VI_EDITOR="nvim"
     # Disable the cursor style feature
     ZVM_CURSOR_STYLE_ENABLED=false
+    # init other conf after zsh_vi_mode
+    zvm_after_init_commands+=(source_fzf_keybinds)
+}
+
+function source_fzf_keybinds() {
+    # C-r    command history
+    # C-t    file list
+    # M-c    change to list dir
+    if [ -f /usr/share/fzf/completion.zsh ]; then
+        source /usr/share/fzf/completion.zsh
+        source /usr/share/fzf/key-bindings.zsh
+    elif [ -f /usr/share/doc/fzf/examples/completion.zsh ]; then
+        source /usr/share/doc/fzf/examples/completion.zsh
+        source /usr/share/doc/fzf/examples/key-bindings.zsh
+    fi
 }
 # }}}
 
-# zsh plugin {{{1
-if [ -f ~/.zplug/init.zsh ]; then
-    source ~/.zplug/init.zsh
-
-    # plugins {{{
-    zplug "jeffreytse/zsh-vi-mode"
-    zplug "zsh-users/zsh-syntax-highlighting", defer:2
-    # }}}
-
-    if ! zplug check; then
-        zplug install
-    fi
-    zplug load
-fi
-# }}}
 
 # zsh option {{{
 setopt re_match_pcre
@@ -201,16 +201,7 @@ if (( $+commands[fzf] )); then
         export FZF_TMUX=1
     fi
 
-    # C-r    command history
-    # C-t    file list
-    # M-c    change to list dir
-    if [ -f /usr/share/fzf/completion.zsh ]; then
-        source /usr/share/fzf/completion.zsh
-        source /usr/share/fzf/key-bindings.zsh
-    elif [ -f /usr/share/doc/fzf/examples/completion.zsh ]; then
-        source /usr/share/doc/fzf/examples/completion.zsh
-        source /usr/share/doc/fzf/examples/key-bindings.zsh
-    fi
+    # source_fzf_keybinds
 
     tmuxkillsession () {
         # zsh need `setopt re_match_pcre`
@@ -240,7 +231,7 @@ fi
 # add alias for dependence binaries {{{1
 (( $+commands[batcat] ))        && alias bat='batcat'
 (( $+commands[crackmapexec] ))  && alias cme='crackmapexec'
-(( $+commands[fzf] ))           && alias fcd='p="$(ls -d */ | fzf --exit-0)";[ -n "${p}" ] && cd "${p}"'
+(( $+commands[fzf] ))           && alias fcd='p="$(find . -type d 2>/dev/null | fzf --exit-0)";[ -n "${p}" ] && cd "${p}"'
 (( $+commands[fzf] ))           && alias fcp='function bb82ce0d(){ [ $# -lt 1 ] && return || ([ -z "$1" ] && exit 1); p=$(find "$1" 2>/dev/null | fzf --exit-0);[ -n "${p}" ]  && ([ -d "${p}" ]  && cp -r "${p}" . || cp "${p}" . );}; bb82ce0d'
 (( $+commands[fzf] ))           && alias fvi='f="$(find . -type f 2>/dev/null | fzf --exit-0)";[ -n "${f}" ] && vi "${f}"'
 (( $+commands[gobuster] ))      && alias gobuster-dir-param='gobuster dir --no-error -a "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101 Firefox/102.0" -e -r'
@@ -266,13 +257,21 @@ export EDITOR="vi"
 (( $+commands[batcat] )) && export PAGER="batcat" || ( (( $+commands[bat] )) && export PAGER="bat" || export PAGER="less")
 # }}}
 
-# enable completion features {{{
-autoload -Uz compinit
-ZSH_COMPDUMP="${HOME}/.cache/zcompdump"
-if [[ -n "${ZSH_COMPDUMP}"(#qN.mh+24) ]]; then
-    compinit -d "${ZSH_COMPDUMP}";
-    compdump
-else
-    compinit -C;
-fi;
+# zsh plugin {{{1
+#
+# make zplug bolck at the end of .zshrc
+#
+if [ -f ~/.zplug/init.zsh ]; then
+    source ~/.zplug/init.zsh
+
+    # plugins {{{
+    zplug "jeffreytse/zsh-vi-mode"
+    zplug "zsh-users/zsh-syntax-highlighting", defer:3
+    # }}}
+
+    if ! zplug check; then
+        zplug install
+    fi
+    zplug load
+fi
 # }}}
