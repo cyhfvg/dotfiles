@@ -297,12 +297,15 @@ if [ -n "$(which fzf)" ]; then
         export FZF_TMUX=1
     fi
 
+    # C-r    command history
+    # C-t    file list
+    # M-c    change to list dir
     if [ -f /usr/share/fzf/completion.zsh ]; then
         source /usr/share/fzf/completion.zsh
-        # C-r    command history
-        # C-t    file list
-        # M-c    change to list dir
         source /usr/share/fzf/key-bindings.zsh
+    elif [ -f /usr/share/doc/fzf/examples/completion.zsh ]; then
+        source /usr/share/doc/fzf/examples/completion.zsh
+        source /usr/share/doc/fzf/examples/key-bindings.zsh
     fi
 
     tmuxkillsession () {
