@@ -297,12 +297,12 @@ if [ -n "$(which fzf)" ]; then
         export FZF_TMUX=1
     fi
 
-    if [ -f /usr/share/doc/fzf/examples/completion.zsh ]; then
-        source /usr/share/doc/fzf/examples/completion.zsh
+    if [ -f /usr/share/fzf/completion.zsh ]; then
+        source /usr/share/fzf/completion.zsh
         # C-r    command history
         # C-t    file list
         # M-c    change to list dir
-        source /usr/share/doc/fzf/examples/key-bindings.zsh
+        source /usr/share/fzf/key-bindings.zsh
     fi
 
     tmuxkillsession () {
@@ -356,8 +356,4 @@ alias stealth_ssh='ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecki
 # export global variables {{{
 export EDITOR="vi"
 which bat &>/dev/null && export PAGER="bat" || export PAGER="less"
-# }}}
-
-# quick append command {{{
-alias kali='ssh kali'
 # }}}
