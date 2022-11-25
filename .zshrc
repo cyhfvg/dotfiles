@@ -14,7 +14,7 @@ function zvm_config() {
 # }}}
 
 # zsh plugin {{{1
-if [ -e ~/.zplug/init.zsh ]; then
+if [ -f ~/.zplug/init.zsh ]; then
     source ~/.zplug/init.zsh
 
     # plugins {{{
@@ -194,7 +194,7 @@ fi
 # }}}
 
 # fzf {{{1
-if [ -n "$(which fzf)" ]; then
+if which fzf &>/dev/null; then
     # 'string
     # !string
     # str1 str2
