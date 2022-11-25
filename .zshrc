@@ -356,5 +356,5 @@ alias stealth_ssh='ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecki
 
 # export global variables {{{
 export EDITOR="vi"
-which bat &>/dev/null && export PAGER="bat" || export PAGER="less"
+which batcat &>/dev/null && export PAGER="batcat" || ( which bat &>/dev/null && export PAGER="bat" || export PAGER="less")
 # }}}
