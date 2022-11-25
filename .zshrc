@@ -4,8 +4,29 @@
 #
 #
 
-# ~/.zshrc file for zsh interactive shells.
-# see /usr/share/doc/zsh/examples/zshrc for examples
+# basic functions {{{1
+function zvm_config() {
+    ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+    ZVM_VI_EDITOR="nvim"
+    # Disable the cursor style feature
+    ZVM_CURSOR_STYLE_ENABLED=false
+}
+# }}}
+
+# zsh plugin {{{1
+if [ -e ~/.zplug/init.zsh ]; then
+    source ~/.zplug/init.zsh
+
+    # plugins {{{
+    zplug "jeffreytse/zsh-vi-mode"
+    # }}}
+
+    if ! zplug check; then
+        zplug install
+    fi
+    zplug load
+fi
+# }}}
 
 # zsh option {{{
 setopt re_match_pcre
@@ -15,10 +36,8 @@ setopt interactivecomments # allow comments in interactive mode
 setopt nonomatch           # hide error message if there is no match for the pattern
 setopt notify              # report the status of background jobs immediately
 setopt no_beep
-#setopt numericglobsort     # sort filenames numerically when it makes sense
 unsetopt correct            # (don't do) auto correct mistakes
 unsetopt correctall         # (don't do) auto correct mistakes for arguments
-#setopt magicequalsubst     # enable filename expansion for arguments of the form ‘anything=expression’
 #}}}
 
 WORDCHARS=${WORDCHARS//\/} # Don't consider certain characters part of the word
@@ -27,15 +46,11 @@ WORDCHARS=${WORDCHARS//\/} # Don't consider certain characters part of the word
 PROMPT_EOL_MARK=""
 
 # keybindings {{{1
-#bindkey -e                                        # emacs key bindings
-bindkey -v                                        # vi key bindings
-bindkey '^[[3~' delete-char                       # delete
+bindkey '^[[3~' delete-char                         # delete
 bindkey "^A"   beginning-of-line                    # ctrl-a
 bindkey "^E"   end-of-line                          # ctrl-e
 bindkey "^U"   backward-kill-line                   # ctrl-u
 bindkey "^K"   kill-line                            # ctrl-k
-bindkey "^R"   history-incremental-search-backward  # ctrl-r
-#bindkey ' ' magic-space                           # do history expansion on space
 #}}}
 
 # enable completion features
@@ -63,16 +78,12 @@ setopt hist_expire_dups_first # delete duplicates first when HISTFILE size excee
 setopt hist_ignore_dups       # ignore duplicated commands history list
 setopt hist_ignore_space      # ignore commands that start with space
 setopt hist_verify            # show command with history expansion to user before running it
-#setopt share_history         # share command history data
 
 # force zsh to show the complete history
 alias history="history 0"
 
 # configure `time` format
 TIMEFMT=$'\nreal\t%E\nuser\t%U\nsys\t%S\ncpu\t%P'
-
-# make less more friendly for non-text input files, see lesspipe(1)
-#[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
