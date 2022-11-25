@@ -4,6 +4,10 @@
 #
 #
 
+# optimize performance {{{
+skip_global_compinit=1
+# }}}
+
 # basic functions {{{1
 function zvm_config() {
     ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
@@ -54,22 +58,6 @@ bindkey "^U"   backward-kill-line                   # ctrl-u
 bindkey "^K"   kill-line                            # ctrl-k
 #}}}
 
-# enable completion features
-autoload -Uz compinit
-compinit -d ~/.cache/zcompdump
-zstyle ':completion:*:*:*:*:*' menu select
-zstyle ':completion:*' auto-description 'specify: %d'
-zstyle ':completion:*' completer _expand _complete
-zstyle ':completion:*' format 'Completing %d'
-zstyle ':completion:*' group-name ''
-zstyle ':completion:*' list-colors ''
-zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
-zstyle ':completion:*' rehash true
-zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
-zstyle ':completion:*' use-compctl false
-zstyle ':completion:*' verbose true
-zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 # History configurations
 HISTFILE=~/.zsh_history
@@ -188,8 +176,6 @@ if [ -f $HOME/.asdf/asdf.sh ]; then
     . $HOME/.asdf/asdf.sh
     # append completions to fpath
     fpath=(${ASDF_DIR}/completions $fpath)
-    # initialise completions with ZSH's compinit
-    autoload -Uz compinit && compinit
 fi
 # }}}
 
@@ -279,3 +265,13 @@ alias stealth_ssh='ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecki
 export EDITOR="vi"
 (( $+commands[batcat] )) && export PAGER="batcat" || ( (( $+commands[bat] )) && export PAGER="bat" || export PAGER="less")
 # }}}
+
+# enable completion features {{{
+autoload -Uz compinit
+ZSH_COMPDUMP="${HOME}/.cache/zcompdump"
+if [[ -n "${ZSH_COMPDUMP}"(#qN.mh+24) ]]; then
+    compinit -d "${ZSH_COMPDUMP}";
+    compdump
+else
+    compinit -C;
+fi;
