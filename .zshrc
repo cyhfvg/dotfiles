@@ -19,6 +19,7 @@ if [ -e ~/.zplug/init.zsh ]; then
 
     # plugins {{{
     zplug "jeffreytse/zsh-vi-mode"
+    zplug "zsh-users/zsh-syntax-highlighting", defer:2
     # }}}
 
     if ! zplug check; then
