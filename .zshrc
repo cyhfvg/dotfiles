@@ -30,8 +30,16 @@ function source_fzf_keybinds() {
         source /usr/share/doc/fzf/examples/key-bindings.zsh
     fi
 }
-# }}}
 
+function conf_at_last() {
+    # NOTE: last one, zsh-syntax-highlighting
+    if [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+        source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    elif [ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+        source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    fi
+}
+# }}}
 
 # zsh option {{{
 setopt re_match_pcre
@@ -50,15 +58,6 @@ WORDCHARS=${WORDCHARS//\/} # Don't consider certain characters part of the word
 # hide EOL sign ('%')
 PROMPT_EOL_MARK=""
 
-# keybindings {{{1
-bindkey '^[[3~' delete-char                         # delete
-bindkey "^A"   beginning-of-line                    # ctrl-a
-bindkey "^E"   end-of-line                          # ctrl-e
-bindkey "^U"   backward-kill-line                   # ctrl-u
-bindkey "^K"   kill-line                            # ctrl-k
-#}}}
-
-
 # History configurations
 HISTFILE=~/.zsh_history
 HISTSIZE=1000
@@ -68,11 +67,7 @@ setopt hist_ignore_dups       # ignore duplicated commands history list
 setopt hist_ignore_space      # ignore commands that start with space
 setopt hist_verify            # show command with history expansion to user before running it
 
-export HISTIGNORE="&:ls:[bf]g:exit:history"
-
-# force zsh to show the complete history
-alias history="history 0"
-
+export HISTIGNORE="&:ls:cd:[bf]g:exit:history"
 
 # configure `time` format
 TIMEFMT=$'\nreal\t%E\nuser\t%U\nsys\t%S\ncpu\t%P'
@@ -131,8 +126,6 @@ toggle_oneline_prompt(){
     zle reset-prompt
 }
 zle -N toggle_oneline_prompt
-# C-p change prompt
-bindkey ^P toggle_oneline_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
@@ -245,10 +238,12 @@ fi
 #}}}
 
 # quick command alias {{{
-alias ..='cd ../'
+# force zsh to show the complete history
 alias ...='cd ../../'
-alias rnc='rlwrap -cAr nc -lvnp'
+alias ..='cd ../'
+alias history="history 0"
 alias lnc='nc -lvnp'
+alias rnc='rlwrap -cAr nc -lvnp'
 alias stealth_ssh='ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no"'
 # }}}
 
@@ -266,7 +261,6 @@ if [ -f ~/.zplug/init.zsh ]; then
 
     # plugins {{{
     zplug "jeffreytse/zsh-vi-mode"
-    zplug "zsh-users/zsh-syntax-highlighting", defer:3
     # }}}
 
     if ! zplug check; then
@@ -284,3 +278,24 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 # kill completion
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 # }}}
+
+# keybindings {{{1
+bindkey '^[[3~' delete-char                         # delete
+bindkey "^A"   beginning-of-line                    # ctrl-a
+bindkey "^E"   end-of-line                          # ctrl-e
+bindkey "^U"   backward-kill-line                   # ctrl-u
+bindkey "^K"   kill-line                            # ctrl-k
+# C-p change prompt
+bindkey ^P toggle_oneline_prompt
+#}}}
+
+
+#
+#
+#
+#
+# load something at last, zsh-syntax-highlightin etc...
+#
+#
+#
+conf_at_last
