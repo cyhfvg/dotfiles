@@ -285,8 +285,8 @@ bindkey "^A"   beginning-of-line                    # ctrl-a
 bindkey "^E"   end-of-line                          # ctrl-e
 bindkey "^U"   backward-kill-line                   # ctrl-u
 bindkey "^K"   kill-line                            # ctrl-k
-# C-p change prompt
-bindkey ^P toggle_oneline_prompt
+# C-O change prompt
+bindkey ^O toggle_oneline_prompt
 #}}}
 
 
