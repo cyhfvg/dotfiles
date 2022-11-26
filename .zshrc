@@ -275,3 +275,12 @@ if [ -f ~/.zplug/init.zsh ]; then
     zplug load
 fi
 # }}}
+
+# completion style {{{1
+# menu style complet, params etc...
+zstyle ':completion:*:*:*:*:*' menu select
+# case ignore
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+# kill completion
+zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
+# }}}
