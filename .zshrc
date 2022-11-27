@@ -243,6 +243,7 @@ alias ...='cd ../../'
 alias ..='cd ../'
 alias history="history 0"
 alias lnc='nc -lvnp'
+alias mkcd='function uagKdsbTu0kLUlL(){ [ $# -lt 1 ] && return || (mkdir -p "$1" && cd "$1") }; uagKdsbTu0kLUlL'
 alias rnc='rlwrap -cAr nc -lvnp'
 alias stealth_ssh='ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no"'
 # }}}
