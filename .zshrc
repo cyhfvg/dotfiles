@@ -290,11 +290,6 @@ bindkey "^K"   kill-line                            # ctrl-k
 bindkey ^O toggle_oneline_prompt
 #}}}
 
-# quick append command {{{
-alias kali='ssh kali'
-# }}}
-
-
 #
 #
 #
