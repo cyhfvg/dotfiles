@@ -11,7 +11,7 @@ skip_global_compinit=1
 # basic functions {{{1
 function zvm_config() {
     ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
-    ZVM_VI_EDITOR="nvim"
+    ZVM_VI_EDITOR="vim"
     # Disable the cursor style feature
     ZVM_CURSOR_STYLE_ENABLED=false
     # init other conf after zsh_vi_mode
@@ -231,7 +231,7 @@ fi
 (( $+commands[impacket-smbserver] ))      && alias smbShareHere='impacket-smbserver -smb2support -username share -password sharepassword share $(pwd)'
 (( $+commands[john] ))          && alias john-Rockyou='john --wordlist=/usr/share/seclists/Passwords/Leaked-Databases/rockyou.txt'
 (( $+commands[ncat] ))          && alias nc='ncat'
-(( $+commands[nvim] ))          && alias vi='nvim' || ( (( $+commands[vim] )) && alias vi='vim')
+(( $+commands[vim] ))          && alias vi='vim' || ( (( $+commands[nvim] )) && alias vi='nvim')
 (( $+commands[python3] ))       && alias pyHttpServer='python3 -m http.server' || ( (( $+commands[python2] )) && alias pyHttpServer='python2 -m SimpleHTTPServer')
 (( $+commands[searchsploit] ))  && alias search='searchsploit'
 (( $+commands[tldr] ))          && alias tldr='tldr -t base16 --linux'
