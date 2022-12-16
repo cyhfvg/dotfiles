@@ -227,10 +227,12 @@ fi
 (( $+commands[fzf] ))           && alias fcd='p="$(find . -type d 2>/dev/null | fzf --exit-0)";[ -n "${p}" ] && cd "${p}"'
 (( $+commands[fzf] ))           && alias fcp='function bb82ce0d(){ [ $# -lt 1 ] && return || ([ -z "$1" ] && exit 1); p=$(find "$1" 2>/dev/null | fzf --exit-0);[ -n "${p}" ]  && ([ -d "${p}" ]  && cp -r "${p}" . || cp "${p}" . );}; bb82ce0d'
 (( $+commands[fzf] ))           && alias fvi='f="$(find . -type f 2>/dev/null | fzf --exit-0)";[ -n "${f}" ] && vi "${f}"'
+(( $+commands[git] ))           && alias g='git'
 (( $+commands[gobuster] ))      && alias gobuster-dir-param='gobuster dir --no-error -a "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101 Firefox/102.0" -e -r'
 (( $+commands[impacket-smbserver] ))      && alias smbShareHere='impacket-smbserver -smb2support -username share -password sharepassword share $(pwd)'
 (( $+commands[john] ))          && alias john-Rockyou='john --wordlist=/usr/share/seclists/Passwords/Leaked-Databases/rockyou.txt'
 (( $+commands[ncat] ))          && alias nc='ncat'
+(( $+commands[proxychains4] ))  && alias pc='proxychains4'
 (( $+commands[python3] ))       && alias pyHttpServer='python3 -m http.server' || ( (( $+commands[python2] )) && alias pyHttpServer='python2 -m SimpleHTTPServer')
 (( $+commands[searchsploit] ))  && alias search='searchsploit'
 (( $+commands[tldr] ))          && alias tldr='tldr -t base16 --linux'
