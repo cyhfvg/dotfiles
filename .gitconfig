@@ -44,6 +44,7 @@
 # }}}
 
 [alias]
+    b = branch
     dt = difftool
     mt = mergetool
     s = status
