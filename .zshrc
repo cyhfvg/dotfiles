@@ -231,10 +231,10 @@ fi
 (( $+commands[impacket-smbserver] ))      && alias smbShareHere='impacket-smbserver -smb2support -username share -password sharepassword share $(pwd)'
 (( $+commands[john] ))          && alias john-Rockyou='john --wordlist=/usr/share/seclists/Passwords/Leaked-Databases/rockyou.txt'
 (( $+commands[ncat] ))          && alias nc='ncat'
-(( $+commands[vim] ))          && alias vi='vim' || ( (( $+commands[nvim] )) && alias vi='nvim')
 (( $+commands[python3] ))       && alias pyHttpServer='python3 -m http.server' || ( (( $+commands[python2] )) && alias pyHttpServer='python2 -m SimpleHTTPServer')
 (( $+commands[searchsploit] ))  && alias search='searchsploit'
 (( $+commands[tldr] ))          && alias tldr='tldr -t base16 --linux'
+(( $+commands[vim] ))           && alias vi='vim' || ( (( $+commands[nvim] )) && alias vi='nvim')
 #}}}
 
 # quick command alias {{{
@@ -249,7 +249,7 @@ alias stealth_ssh='ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecki
 # }}}
 
 # export global variables {{{
-export EDITOR="vi"
+(( $+commands[vim] ))    && export EDITOR="vim" || ( (( $+commands[nvim] )) && export EDITOR="nvim")
 (( $+commands[batcat] )) && export PAGER="batcat" || ( (( $+commands[bat] )) && export PAGER="bat" || export PAGER="less")
 # }}}
 

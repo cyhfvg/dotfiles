@@ -1,23 +1,49 @@
-# delta
+[user]
+    email = temp@notexist.com
+    name = fakename
+
+[init]
+    defaultBranch = main
+
 [core]
     editor = vim
-    pager = delta
 
-[interactive]
-    diffFilter = delta --color-only --features=interactive
+[pager]
+    diff =
 
-[delta]
-    features = decorations
-    line-numbers = true
+[color]
+    ui = auto
 
-[delta "interactive"]
-    keep-plus-minus-markers = false
+# diff {{{1
+# [git diff with vimdiff :ref](https://nafuruby.hatenablog.com/entry/2016/01/03/201520)
+[diff]
+    tool = vimdiff
 
-[delta "decorations"]
-    commit-decoration-style = blue ol
-    commit-style = raw
-    file-style = omit
-    hunk-header-decoration-style = blue box
-    hunk-header-file-style = red
-    hunk-header-line-number-style = "#067a00"
-    hunk-header-style = file line-number syntax
+[difftool]
+    prompt = false
+
+#}}}
+
+# merge {{{1
+# [git merge with vim :ref](https://www.youtube.com/watch?v=kFVjoIish0E)
+#
+# when exit mistake:
+# git reset --hard
+[merge]
+    tool = vimdiff
+    conflictStyle = diff3
+
+[mergetool]
+    prompt = false
+    keepBackup = false
+
+
+[mergetool "vimdiff"]
+    layout = "(LOCAL,BASE,REMOTE)/MERGED"
+
+# }}}
+
+[alias]
+    dt = difftool
+    mt = mergetool
+    s = status
