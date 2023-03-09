@@ -1,0 +1,15 @@
+export LANG="zh_CN.UTF-8"
+export LC_ALL="zh_CN.UTF-8"
+export OUTPUT_CHARSET="utf-8"
+
+alias ls='ls --show-control-chars --color=auto'
+alias l='ls --color=auto'
+alias ll='ls -l --color=auto'
+alias la='ls -al --color=auto'
+alias dir='dir -N --color'
+alias grep='grep --color=auto'
+alias ..='cd ..'
+
+
+# escap windows terminal starting directory with prompt
+PROMPT_COMMAND=${PROMPT_COMMAND:+"$PROMPT_COMMAND; "}'printf "\e]9;9;%s\e\\" "`cygpath -w "$PWD"`"'
