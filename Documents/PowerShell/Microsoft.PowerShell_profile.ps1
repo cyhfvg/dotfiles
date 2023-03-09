@@ -4,6 +4,7 @@
 Invoke-Expression (&scoop-search --hook)
 
 # escape windows terminal starting directory prompt
+# [ref](https://learn.microsoft.com/en-us/windows/terminal/tutorials/new-tab-same-directory)
 function prompt {
   $loc = $executionContext.SessionState.Path.CurrentLocation;
 

@@ -12,4 +12,5 @@ alias ..='cd ..'
 
 
 # escap windows terminal starting directory with prompt
+# [ref](https://learn.microsoft.com/en-us/windows/terminal/tutorials/new-tab-same-directory)
 PROMPT_COMMAND=${PROMPT_COMMAND:+"$PROMPT_COMMAND; "}'printf "\e]9;9;%s\e\\" "`cygpath -w "$PWD"`"'
