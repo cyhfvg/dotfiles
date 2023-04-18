@@ -237,6 +237,7 @@ fi
 (( $+commands[searchsploit] ))  && alias search='searchsploit'
 (( $+commands[tldr] ))          && alias tldr='tldr -t base16 --linux'
 (( $+commands[vim] ))           && alias vi='vim' || ( (( $+commands[nvim] )) && alias vi='nvim')
+(( $+commands[msfconsole] ))    && alias msf='msfconsole'
 #}}}
 
 # quick command alias {{{
@@ -251,6 +252,21 @@ alias stealth_ssh='ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecki
 # }}}
 
 # export global variables {{{
+export LC_ALL="en_US.UTF-8"
+
+# "bat" as manpager
+#export MANPAGER="sh -c 'col -bx | batcat -l man -p'"
+
+# "vim" as manpager two (tags normal)
+man() {
+  /usr/bin/man "$@" | \
+    col -b | \
+    vim --not-a-term -Rn -c 'set buftype=nofile showtabline=0 ft=man nomod nolist norelativenumber nonu noma' -c 'normal L' -
+}
+
+# "vim" as manpager two (tags error)
+#export MANPAGER='/usr/bin/zsh -c "vim -Rn -c \"set buftype=nofile showtabline=0 ft=man ts=8 nomod nolist norelativenumber nonu noma\" -c \"normal L\" </dev/tty <(col -b)"'
+
 (( $+commands[vim] ))    && export EDITOR="vim" || ( (( $+commands[nvim] )) && export EDITOR="nvim")
 (( $+commands[batcat] )) && export PAGER="batcat" || ( (( $+commands[bat] )) && export PAGER="bat" || export PAGER="less")
 # }}}
