@@ -1,0 +1,11 @@
+# git bash bashrc
+
+export LANG="zh_CN.UTF-8"
+export LC_ALL="zh_CN.UTF-8"
+export OUTPUT_CHARSET="utf-8"
+
+#set -o vi
+#bind -x '"\C-l": clear;'
+
+# escap windows terminal starting directory with prompt
+PROMPT_COMMAND=${PROMPT_COMMAND:+"$PROMPT_COMMAND; "}'printf "\e]9;9;%s\e\\" "`cygpath -w "$PWD"`"'
