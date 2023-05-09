@@ -8,6 +8,7 @@
 skip_global_compinit=1
 # }}}
 
+# [zsh-vi-mode ref](https://github.com/jeffreytse/zsh-vi-mode)
 # basic functions {{{1
 function zvm_config() {
     ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
@@ -249,6 +250,10 @@ alias lnc='nc -lvnp'
 alias mkcd='function uagKdsbTu0kLUlL(){ [ $# -lt 1 ] && return || mkdir -p "$@" && cd "$@"; }; uagKdsbTu0kLUlL'
 alias rnc='rlwrap -cAr nc -lvnp'
 alias stealth_ssh='ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no"'
+# docker pull rustscan/rustscan:latest
+alias rustscan='docker run --user=root -it --rm --name rustscan rustscan/rustscan:latest'
+# docker pull ghcr.io/tomwright/dasel:latest
+alias dasel='docker run -i --rm ghcr.io/tomwright/dasel:latest'
 # }}}
 
 # export global variables {{{
