@@ -1,5 +1,18 @@
 # zsh profile file : ~/.zshenv -> ~/.zprofile -> ~/.zshrc
 
+# $PATH {{{1
+typeset -U path PATH
+
+# ~/.local/bin
+(( $+commands[pipx] )) && path=( $path ${PATH}:${HOME}/.local/bin )
+# ~/.scripts
+[[ -d ${HOME}/.scripts ]] && path=( $path ${PATH}:${HOME}/.scripts )
+# ~/.local/mybin
+[[ -d ${HOME}/.local/mybin ]] && path=( $path  ${PATH}:${HOME}/.local/mybin )
+
+export PATH
+# }}}
+
 # mosh env {{{1
 ps -p $PPID | grep mosh-server > /dev/null
 if [[ "$?" == "0" ]]; then
