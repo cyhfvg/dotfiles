@@ -226,7 +226,7 @@ fi
 (( $+commands[batcat] ))        && alias bat='batcat'
 (( $+commands[crackmapexec] ))  && alias cme='crackmapexec'
 (( $+commands[fzf] ))           && alias fcd='p="$(find . -type d 2>/dev/null | fzf --exit-0)";[ -n "${p}" ] && cd "${p}"'
-(( $+commands[fzf] ))           && alias fcp='function bb82ce0d(){ [ $# -lt 1 ] && return || ([ -z "$1" ] && exit 1); p=$(find "$1" 2>/dev/null | fzf --exit-0);[ -n "${p}" ]  && ([ -d "${p}" ]  && cp -r "${p}" . || cp "${p}" . );}; bb82ce0d'
+(( $+commands[fzf] ))           && alias fcp='bb82ce0d'
 (( $+commands[fzf] ))           && alias fvi='f="$(find . -type f 2>/dev/null | fzf --exit-0)";[ -n "${f}" ] && vi "${f}"'
 (( $+commands[git] ))           && alias g='git'
 (( $+commands[gobuster] ))      && alias gobuster-dir-param='gobuster dir --no-error -a "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101 Firefox/102.0" -e -r'
@@ -246,12 +246,12 @@ fi
 alias ...='cd ../../'
 alias ..='cd ../'
 alias history="history 0"
-alias lnc='nc -lvnp'
-alias mkcd='function uagKdsbTu0kLUlL(){ [ $# -lt 1 ] && return || mkdir -p "$@" && cd "$@"; }; uagKdsbTu0kLUlL'
-alias rnc='rlwrap -cAr nc -lvnp'
+alias lnc='echo PT09PT09PT09PQpweXRob24zIC1jICdpbXBvcnQgcHR5O3B0eS5zcGF3bigiL2Jpbi9iYXNoIik7JwpDLXoKc3R0eSByYXcgLWVjaG87ZmcKZXhwb3J0IFRFUk09eHRlcm0KPT09PT09PT09PQoK|base64 -d;nc -lvnp'
+alias mkcd='uagKdsbTu0kLUlL'
+alias rnc='rlwrap -H ~/.rlwrap_history -cAr nc -lvnp'
 alias stealth_ssh='ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no"'
 # docker pull rustscan/rustscan:latest
-alias rustscan='docker run --user=root -it --rm --name rustscan rustscan/rustscan:latest'
+alias rustscan='docker run --user=root --workdir /tmp/ -v $PWD:/tmp -it --rm --name rustscan rustscan/rustscan:latest'
 # docker pull ghcr.io/tomwright/dasel:latest
 alias dasel='docker run -i --rm ghcr.io/tomwright/dasel:latest'
 # }}}
