@@ -4,11 +4,11 @@
 typeset -U path PATH
 
 # ~/.local/bin
-(( $+commands[pipx] )) && path=( $path ${PATH}:${HOME}/.local/bin )
+path=( $path ${HOME}/.local/bin(N-/) )
 # ~/.scripts
-[[ -d ${HOME}/.scripts ]] && path=( $path ${PATH}:${HOME}/.scripts )
+path=( $path ${HOME}/.scripts(N-/) )
 # ~/.local/mybin
-[[ -d ${HOME}/.local/mybin ]] && path=( $path  ${PATH}:${HOME}/.local/mybin )
+path=( $path  ${HOME}/.local/mybin(N-/) )
 
 export PATH
 # }}}
@@ -23,7 +23,7 @@ fi
 # }}}
 
 ## rust env {{{1
-# . "$HOME/.cargo/env"
+[[ -f ${HOME}/.cargo/env ]] && . "$HOME/.cargo/env"
 ## }}}
 
 ## functions {{{1
