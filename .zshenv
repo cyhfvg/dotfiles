@@ -9,7 +9,8 @@ path=( $path ${HOME}/.local/bin(N-/) )
 path=( $path ${HOME}/.scripts(N-/) )
 # ~/.local/mybin
 path=( $path  ${HOME}/.local/mybin(N-/) )
-
+# ~/.yarn/bin
+(( $+commands[yarn] ))    && path=( $path  ${HOME}/.yarn/bin(N-/) )
 export PATH
 # }}}
 
