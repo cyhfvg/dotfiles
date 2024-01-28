@@ -88,59 +88,87 @@ plugins:
       size: 2048
       lazy_cache_ttl: 1800
 
+# 方案一: mosdns 不仅分流,自己做查询 {{{1
+#
+#  - tag: forward_local
+#    type: forward
+#    args:
+#      concurrent: 2
+#      upstreams:
+#        - addr: "https://dns.alidns.com/dns-query"
+#          dial_addr: "223.5.5.5"
+#          bootstrap: ""
+#          idle_timeout: 30
+#          enable_pipeline: true
+#          enable_http3: false
+#          max_conns: 2
+#          insecure_skip_verify: false
+#          so_mark: 0
+#          bind_to_device: ""
+#        - addr: "https://doh.pub/dns-query"
+#          dial_addr: "1.12.12.12"
+#          bootstrap: ""
+#          idle_timeout: 30
+#          enable_pipeline: true
+#          enable_http3: false
+#          max_conns: 2
+#          insecure_skip_verify: false
+#          so_mark: 0
+#          bind_to_device: ""
+#
+#  - tag: forward_remote
+#    type: forward
+#    args:
+#      concurrent: 2
+#      upstreams:
+#        - addr: "https://dns.google/dns-query"
+#          dial_addr: "8.8.8.8"
+#          bootstrap: ""
+#          socks5: "127.0.0.1:7891"
+#          idle_timeout: 30
+#          enable_pipeline: true
+#          enable_http3: false
+#          max_conns: 2
+#          insecure_skip_verify: false
+#          so_mark: 0
+#          bind_to_device: ""
+#        - addr: "https://1.0.0.1/dns-query"
+#          dial_addr: "1.0.0.1"
+#          bootstrap: ""
+#          socks5: "127.0.0.1:7891"
+#          idle_timeout: 30
+#          enable_pipeline: true
+#          enable_http3: false
+#          max_conns: 2
+#          insecure_skip_verify: false
+#          so_mark: 0
+#          bind_to_device: ""
+#
+# }}}
+
+# 方案二，上游ADG做实际查询,mosdns只做分流 {{{1
+#
   - tag: forward_local
     type: forward
     args:
       concurrent: 2
       upstreams:
-        - addr: "https://dns.alidns.com/dns-query"
-          dial_addr: "223.5.5.5"
-          bootstrap: ""
+        - addr: "udp://192.168.5.149:53"
           idle_timeout: 30
-          enable_pipeline: true
-          enable_http3: false
+          enable_pipeline: false
           max_conns: 2
-          insecure_skip_verify: false
-          so_mark: 0
-          bind_to_device: ""
-        - addr: "https://doh.pub/dns-query"
-          dial_addr: "1.12.12.12"
-          bootstrap: ""
-          idle_timeout: 30
-          enable_pipeline: true
-          enable_http3: false
-          max_conns: 2
-          insecure_skip_verify: false
-          so_mark: 0
-          bind_to_device: ""
 
   - tag: forward_remote
     type: forward
     args:
       concurrent: 2
       upstreams:
-        - addr: "https://dns.google/dns-query"
-          dial_addr: "8.8.8.8"
-          bootstrap: ""
-          socks5: "127.0.0.1:7891"
+        - addr: "udp://192.168.5.148:53"
           idle_timeout: 30
-          enable_pipeline: true
-          enable_http3: false
+          enable_pipeline: false
           max_conns: 2
-          insecure_skip_verify: false
-          so_mark: 0
-          bind_to_device: ""
-        - addr: "https://1.0.0.1/dns-query"
-          dial_addr: "1.0.0.1"
-          bootstrap: ""
-          socks5: "127.0.0.1:7891"
-          idle_timeout: 30
-          enable_pipeline: true
-          enable_http3: false
-          max_conns: 2
-          insecure_skip_verify: false
-          so_mark: 0
-          bind_to_device: ""
+#
+# }}}
 
   - tag: forward_remote_upstream
     type: sequence
