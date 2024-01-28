@@ -169,6 +169,10 @@ rule-providers:
 # rules {{{1
 rules:
   # manual rule {{{1
+  - IP-CIDR,223.5.5.5/32,DIRECT
+  - IP-CIDR,1.12.12.12/32,DIRECT
+  - IP-CIDR,8.8.8.8/32,AUTOPROXY
+  - IP-CIDR,1.0.0.1/32,AUTOPROXY
   - DOMAIN-SUFFIX,openai.com,GPT_hk2us
   - DOMAIN-SUFFIX,auth0.com,GPT_hk2us
   - DOMAIN-SUFFIX,shodan.io,AUTOPROXY
