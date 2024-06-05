@@ -29,6 +29,10 @@ function source_fzf_keybinds() {
     elif [ -f /usr/share/doc/fzf/examples/completion.zsh ]; then
         source /usr/share/doc/fzf/examples/completion.zsh
         source /usr/share/doc/fzf/examples/key-bindings.zsh
+    elif [ -f /usr/local/Cellar/fzf/0.45.0/shell/completion.zsh ]; then
+        # macos, brew
+        source /usr/local/Cellar/fzf/0.45.0/shell/completion.zsh
+        source /usr/local/Cellar/fzf/0.45.0/shell/key-bindings.zsh
     fi
 }
 
