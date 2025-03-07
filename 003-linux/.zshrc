@@ -243,6 +243,7 @@ fi
 (( $+commands[tldr] ))          && alias tldr='tldr -t base16 --linux'
 (( $+commands[vim] ))           && alias vi='vim' || ( (( $+commands[nvim] )) && alias vi='nvim')
 (( $+commands[msfconsole] ))    && alias msf='msfconsole'
+(( $+commands[xclip] ))         && alias clip='xclip -sel clip'
 #}}}
 
 # quick command alias {{{

@@ -9,6 +9,8 @@ path=( $path ${HOME}/.local/bin(N-/) )
 path=( $path ${HOME}/.scripts(N-/) )
 # ~/.local/mybin
 path=( $path  ${HOME}/.local/mybin(N-/) )
+# asdf: ~/.asdf/shims
+path=( $path ${ASDF_DATA_DIR:-${HOME}/.asdf}/shims)
 # ~/.yarn/bin
 (( $+commands[yarn] ))    && path=( $path  ${HOME}/.yarn/bin(N-/) )
 export PATH
