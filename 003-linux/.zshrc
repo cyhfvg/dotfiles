@@ -232,7 +232,8 @@ fi
 (( $+commands[proxychains4] ))  && alias pc='proxychains4'
 (( $+commands[python3] ))       && alias pyHttpServer='python3 -m http.server' || ( (( $+commands[python2] )) && alias pyHttpServer='python2 -m SimpleHTTPServer')
 (( $+commands[searchsploit] ))  && alias search='searchsploit'
-(( $+commands[tldr] ))          && alias tldr='tldr -t base16 --linux'
+# apt install tldr
+(( $+commands[tldr] ))          && alias tldr='tldr --platform linux --language zh --color'
 (( $+commands[vim] ))           && alias vi='vim' || ( (( $+commands[nvim] )) && alias vi='nvim')
 (( $+commands[msfconsole] ))    && alias msf='msfconsole'
 (( $+commands[xclip] ))         && alias clip='xclip -sel clip'
