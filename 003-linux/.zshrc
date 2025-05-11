@@ -23,16 +23,8 @@ function source_fzf_keybinds() {
     # C-r    command history
     # C-t    file list
     # M-c    change to list dir
-    if [ -f /usr/share/fzf/completion.zsh ]; then
-        source /usr/share/fzf/completion.zsh
-        source /usr/share/fzf/key-bindings.zsh
-    elif [ -f /usr/share/doc/fzf/examples/completion.zsh ]; then
-        source /usr/share/doc/fzf/examples/completion.zsh
-        source /usr/share/doc/fzf/examples/key-bindings.zsh
-    elif [ -f /usr/local/Cellar/fzf/0.45.0/shell/completion.zsh ]; then
-        # macos, brew
-        source /usr/local/Cellar/fzf/0.45.0/shell/completion.zsh
-        source /usr/local/Cellar/fzf/0.45.0/shell/key-bindings.zsh
+    if command -v fzf >/dev/null 2>&1; then
+        source <(fzf --zsh)
     fi
 }
 
