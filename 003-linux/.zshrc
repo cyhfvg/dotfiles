@@ -283,6 +283,8 @@ if [ -f ~/.zplug/init.zsh ]; then
 
     # plugins {{{
     zplug "jeffreytse/zsh-vi-mode"
+    # fzf-tab 命令行参数补全
+    zplug "Aloxaf/fzf-tab"
     # }}}
 
     if ! zplug check; then
