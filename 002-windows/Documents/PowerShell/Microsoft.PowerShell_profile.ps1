@@ -14,3 +14,45 @@ function prompt {
   }
   return $out
 }
+
+
+# powershell proxy {{{1
+# 调用方法，注意使用 dot-sourcing, 否则函数不会导入当前会话
+# . .\proxy.ps1
+# proxy_on
+# proxy_status
+# proxy_off
+#
+# 其中 gemini 可以使用官方的Proxy参数【gemini --proxy http://127.0.0.1:7893】
+function proxy_on {
+    $proxy = "http://127.0.0.1:7893"
+    $noProxy = "localhost,127.0.0.1,::1"
+
+    $env:HTTP_PROXY = $proxy
+    $env:HTTPS_PROXY = $proxy
+    $env:ALL_PROXY = $proxy
+    $env:NO_PROXY = $noProxy
+
+    Write-Host "[proxy_on] Proxy enabled: $proxy"
+    Write-Host "HTTP_PROXY  = $env:HTTP_PROXY"
+    Write-Host "HTTPS_PROXY = $env:HTTPS_PROXY"
+    Write-Host "ALL_PROXY   = $env:ALL_PROXY"
+    Write-Host "NO_PROXY    = $env:NO_PROXY"
+}
+
+function proxy_off {
+    Remove-Item Env:HTTP_PROXY -ErrorAction SilentlyContinue
+    Remove-Item Env:HTTPS_PROXY -ErrorAction SilentlyContinue
+    Remove-Item Env:ALL_PROXY -ErrorAction SilentlyContinue
+    Remove-Item Env:NO_PROXY -ErrorAction SilentlyContinue
+
+    Write-Host "[proxy_off] Proxy disabled."
+}
+
+function proxy_status {
+    Write-Host "HTTP_PROXY  = $env:HTTP_PROXY"
+    Write-Host "HTTPS_PROXY = $env:HTTPS_PROXY"
+    Write-Host "ALL_PROXY   = $env:ALL_PROXY"
+    Write-Host "NO_PROXY    = $env:NO_PROXY"
+}
+# }}}
