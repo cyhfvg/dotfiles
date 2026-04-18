@@ -1,0 +1,235 @@
+Windows Terminal 配置与快捷键说明
+生成日期：2026-04-18
+配置文件：settings.json
+
+一、当前配置概览
+
+默认 Profile：
+  Git Bash
+
+已配置 Profile：
+  Git Bash
+  PowerShell 7
+  Command Prompt
+  Windows PowerShell
+
+窗口与交互行为：
+  启动模式：最大化
+  新标签位置：在当前标签页之后
+  标签宽度：按标题长度
+  窗口复用：使用任意现有窗口
+  选中文本自动复制：开启
+  复制格式：纯文本，不复制富文本格式
+  URL 检测：开启，URL 可通过 Ctrl + 点击打开
+  多行粘贴警告：开启
+  大块粘贴警告：开启
+  粘贴时裁剪行尾空白：开启
+  关闭多个标签页确认：开启
+  Ctrl + 鼠标滚轮缩放字体：开启
+  Ctrl + Shift + 鼠标滚轮改变透明度：关闭
+
+外观默认值：
+  字体：Fira Code
+  字号：16
+  配色：Dracula+
+  光标：filledBox
+  Acrylic：开启
+  当前窗口不透明度：88
+  非焦点窗口不透明度：78
+  历史缓冲区：32767 行
+
+
+二、常用快捷键
+
+  Ctrl + Shift + C
+    复制到剪贴板
+
+  Ctrl + Shift + V
+    从剪贴板粘贴
+
+  Ctrl + Shift + T
+    新建默认标签页
+
+  Ctrl + Shift + D
+    复制当前标签页
+
+  Ctrl + Shift + F
+    查找文本
+
+  Ctrl + Shift + A
+    搜索标签页
+
+  Ctrl + Shift + Backspace
+    清空终端缓冲区
+
+
+三、新建指定 Shell 标签页
+
+  Alt + Shift + 1
+    新建 Git Bash 标签页
+
+  Alt + Shift + 2
+    新建 PowerShell 7 标签页
+
+  Alt + Shift + 3
+    新建 Command Prompt 标签页
+
+
+四、标签页切换
+
+  Alt + 1
+    切换到第 1 个标签页
+
+  Alt + 2
+    切换到第 2 个标签页
+
+  Alt + 3
+    切换到第 3 个标签页
+
+  Alt + 4
+    切换到第 4 个标签页
+
+  Alt + 5
+    切换到第 5 个标签页
+
+  Alt + 6
+    切换到第 6 个标签页
+
+  Alt + 7
+    切换到第 7 个标签页
+
+  Alt + 8
+    切换到第 8 个标签页
+
+  Alt + 9
+    切换到最后一个标签页
+
+  Ctrl + Tab
+    切换到下一个标签页
+
+  Ctrl + Shift + Tab
+    切换到上一个标签页
+
+
+五、分屏与 Pane 管理
+
+  Ctrl + Shift + \
+    向右拆分 Pane
+
+  Ctrl + Shift + -
+    向下拆分 Pane
+
+  Ctrl + Shift + B
+    放大/还原当前 Pane
+
+  Alt + H
+    焦点移动到左侧 Pane
+
+  Alt + J
+    焦点移动到下方 Pane
+
+  Alt + K
+    焦点移动到上方 Pane
+
+  Alt + L
+    焦点移动到右侧 Pane
+
+  Ctrl + Shift + H
+    向左调整当前 Pane 大小
+
+  Ctrl + Shift + J
+    向下调整当前 Pane 大小
+
+  Ctrl + Shift + K
+    向上调整当前 Pane 大小
+
+  Ctrl + Shift + L
+    向右调整当前 Pane 大小
+
+  Ctrl + Shift + Left
+    与左侧 Pane 交换位置
+
+  Ctrl + Shift + Down
+    与下方 Pane 交换位置
+
+  Ctrl + Shift + Up
+    与上方 Pane 交换位置
+
+  Ctrl + Shift + Right
+    与右侧 Pane 交换位置
+
+
+六、查找与搜索
+
+  Ctrl + Shift + F
+    打开查找框
+
+  F3
+    查找下一个匹配项
+
+  Shift + F3
+    查找上一个匹配项
+
+  Ctrl + Shift + A
+    打开标签页搜索
+
+
+七、滚动与缓冲区
+
+  Alt + Shift + K
+    向上滚动
+
+  Alt + Shift + J
+    向下滚动
+
+  Ctrl + Shift + PageUp
+    向上滚动一页
+
+  Ctrl + Shift + PageDown
+    向下滚动一页
+
+  Ctrl + Shift + Home
+    滚动到历史缓冲区顶部
+
+  Ctrl + Shift + End
+    滚动到历史缓冲区底部
+
+  Ctrl + Shift + Backspace
+    清空终端缓冲区
+
+
+八、设置、菜单与窗口状态
+
+  Ctrl + ,
+    打开 Windows Terminal 设置界面
+
+  Ctrl + Shift + ,
+    打开 settings.json 配置文件
+
+  Ctrl + Shift + Space
+    打开新标签页下拉菜单
+
+  Ctrl + Shift + Z
+    切换 Focus Mode
+
+  Ctrl + Shift + O
+    切换窗口 Always On Top
+
+
+九、使用建议
+
+  1. 主要工作流：
+     使用 Alt + H/J/K/L 在分屏之间移动，使用 Ctrl + Shift + H/J/K/L 调整分屏大小。
+
+  2. 标签页工作流：
+     使用 Alt + 数字直接跳转标签页，使用 Alt + Shift + 1/2/3 快速打开常用 Shell。
+
+  3. 安全粘贴：
+     多行和大块粘贴警告已开启，适合从网页、AI 回复或文档复制命令时降低误执行风险。
+
+  4. URL：
+     URL 检测已开启，终端中的链接可以用 Ctrl + 点击打开。
+
+  5. 透明度：
+     已关闭 Ctrl + Shift + 鼠标滚轮改变透明度，避免误操作；保留 Ctrl + 鼠标滚轮缩放字体。
+
