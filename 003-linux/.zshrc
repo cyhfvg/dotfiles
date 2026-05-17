@@ -186,9 +186,11 @@ if (( $+commands[fzf] )); then
     # fzf exec chain example
     # echo -e "1\n2\n3\n" | fzf | xargs -r echo
 
-    # tmux split pane mode
-    if [ -n "$TMUX" ]; then
+    # tmux split pane mode, only when fzf-tmux is installed
+    if [[ -n "$TMUX" ]] && (( $+commands[fzf-tmux] )); then
         export FZF_TMUX=1
+    else
+        unset FZF_TMUX
     fi
 
     # source_fzf_keybinds
