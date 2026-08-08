@@ -56,8 +56,8 @@ config.show_tab_index_in_tab_bar = false      -- 不显示标签序号
 -- ============================================================
 -- 窗口大小与行为
 -- ============================================================
-config.initial_cols = 140
-config.initial_rows = 40
+config.initial_cols = 100
+config.initial_rows = 30
 config.window_close_confirmation = 'NeverPrompt'   -- 关闭窗口时不询问
 config.adjust_window_size_when_changing_font_size = false
 
