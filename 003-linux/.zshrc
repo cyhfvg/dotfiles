@@ -34,6 +34,8 @@ function conf_at_last() {
         source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     elif [ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
         source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    elif [ -f $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+        source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     fi
 }
 # }}}
@@ -133,33 +135,45 @@ xterm*|rxvt*|Eterm|aterm|kterm|gnome*|alacritty)
     ;;
 esac
 
-# enable color support of ls, less and man, and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
+# enable color support of ls, less and man, and also add handy aliases {{{1
+if command -v dircolors >/dev/null 2>&1; then
+    # ---------- GNU / Linux (或已安装 coreutils) ----------
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     export LS_COLORS="$LS_COLORS:ow=30;44:" # fix ls color for folders with 777 permissions
-
     alias ls='ls --color=auto --group-directories-first'
     alias dir='dir --color=auto'
     alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-    alias diff='diff --color=auto'
-    alias ip='ip --color=auto'
-
-    export LESS_TERMCAP_mb=$'\E[1;31m'     # begin blink
-    export LESS_TERMCAP_md=$'\E[1;36m'     # begin bold
-    export LESS_TERMCAP_me=$'\E[0m'        # reset bold/blink
-    export LESS_TERMCAP_so=$'\E[01;33m'    # begin reverse video
-    export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
-    export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
-    export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
-
-    # Take advantage of $LS_COLORS for completion as well
-    zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-    zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+else
+    # ---------- macOS / BSD ----------
+    export CLICOLOR=1
+    # 可选：自定义颜色（默认是 exfxcxdxbxegedabagacad）
+    # export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
+    alias ls='ls -G'                    # -G 开启颜色
+    # 如果还想按目录优先排序，可以再装 coreutils 用 gls
 fi
+
+# 下面这些对linux/macos都通用
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias diff='diff --color=auto'
+alias ip='ip --color=auto'   # macOS 原生 ip 可能没有 --color，可酌情保留
+
+export LESS_TERMCAP_mb=$'\E[1;31m' # begin blink
+export LESS_TERMCAP_md=$'\E[1;36m' # begin bold
+export LESS_TERMCAP_me=$'\E[0m'    # reset bold/blink
+export LESS_TERMCAP_so=$'\E[01;33m' # begin reverse video
+export LESS_TERMCAP_se=$'\E[0m'    # reset reverse video
+export LESS_TERMCAP_us=$'\E[1;32m' # begin underline
+export LESS_TERMCAP_ue=$'\E[0m'    # reset underline
+
+# Take advantage of $LS_COLORS for completion as well
+# 注意：macOS 下 LS_COLORS 通常不存在，所以这里做个保护
+if [[ -n $LS_COLORS ]]; then
+    zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+fi
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+# }}}
 
 # asdf {{{1
 if [ -f $HOME/.asdf/asdf.sh ]; then
