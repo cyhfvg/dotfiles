@@ -16,7 +16,7 @@ function zvm_config() {
     # Disable the cursor style feature
     ZVM_CURSOR_STYLE_ENABLED=false
     # init other conf after zsh_vi_mode
-    zvm_after_init_commands+=(source_fzf_keybinds)
+    zvm_after_init_commands+=(source_fzf_keybinds zvm_fix_ghostty_paste)
 }
 
 function source_fzf_keybinds() {
@@ -26,6 +26,75 @@ function source_fzf_keybinds() {
     if command -v fzf >/dev/null 2>&1; then
         source <(fzf --zsh)
     fi
+}
+
+# Ghostty 窗口失焦后再粘贴, 末字母会被改成大写.
+# zsh-vi-mode NEX 把 KEYTIMEOUT 压到 10ms. bracketed paste 结束符
+# \e[201~ 一旦被拆开, 漏出的 ~ 在 vicmd 里就是 vi-swap-case.
+# 失焦时的 focus 序列 CSI I / CSI O 会把这次拆分触发出来.
+# https://github.com/jeffreytse/zsh-vi-mode/issues/238
+function zvm_fix_ghostty_paste() {
+    zle -N bracketed-paste zvm-safe-bracketed-paste
+    zle -N zvm-discard-focus
+    bindkey -M viins '^[[I' zvm-discard-focus
+    bindkey -M viins '^[[O' zvm-discard-focus
+    bindkey -M vicmd '^[[I' zvm-discard-focus
+    bindkey -M vicmd '^[[O' zvm-discard-focus
+    zvm_disable_focus_reporting
+    if [[ ${precmd_functions[(Ie)zvm_disable_focus_reporting]} -eq 0 ]]; then
+        precmd_functions+=(zvm_disable_focus_reporting)
+    fi
+}
+
+function zvm_disable_focus_reporting() {
+    [[ -w /dev/tty ]] || return 0
+    printf '\e[?1004l' >/dev/tty
+}
+
+function zvm-discard-focus() {
+    :
+}
+
+function zvm-safe-bracketed-paste() {
+    emulate -L zsh
+    local PASTED pre pre_cur clean k seq ate timeout
+    pre=$BUFFER
+    pre_cur=$CURSOR
+    zle .bracketed-paste PASTED
+    # zsh 5.9 带参数调用只捕获文本, 不写入 BUFFER.
+    if [[ $BUFFER != $pre ]]; then
+        BUFFER=$pre
+        CURSOR=$pre_cur
+    fi
+    clean=${PASTED//$'\e[I'/}
+    clean=${clean//$'\e[O'/}
+    clean=${clean//$'\r'/}
+    LBUFFER+="$clean"
+
+    # 结束符若晚于 KEYTIMEOUT 到达, 在这里吃掉, 避免 ~ 变成 vi-swap-case.
+    timeout=${ZVM_PASTE_DRAIN_TIMEOUT:-0.1}
+    ate=0
+    while (( ate < 3 )); do
+        k=
+        read -t "$timeout" -k 1 k || break
+        seq=$k
+        while [[ $seq == $'\e' || $seq == $'\e[' || $seq == $'\e[2' || $seq == $'\e[20' || $seq == $'\e[201' ]]; do
+            k=
+            read -t 0.05 -k 1 k || break
+            seq+="$k"
+        done
+        case $seq in
+            ($'\e[201~'|$'\e[I'|$'\e[O')
+                ate=$((ate + 1))
+                seq=
+                timeout=0.05
+                ;;
+            (*)
+                [[ -n $seq ]] && zle -U -- "$seq"
+                break
+                ;;
+        esac
+    done
 }
 
 function conf_at_last() {
@@ -173,14 +242,6 @@ if [[ -n $LS_COLORS ]]; then
     zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 fi
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
-# }}}
-
-# asdf {{{1
-if [ -f $HOME/.asdf/asdf.sh ]; then
-    . $HOME/.asdf/asdf.sh
-    # append completions to fpath
-    fpath=(${ASDF_DIR}/completions $fpath)
-fi
 # }}}
 
 # fzf {{{1
